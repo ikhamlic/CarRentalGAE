@@ -11,10 +11,11 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
 
 import ds.gae.ReservationException;
 
@@ -26,10 +27,10 @@ public class CarRentalCompany {
 	@Id
 	private String name;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private Set<Car> cars;
 	
-	@ManyToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private Map<String,CarType> carTypes = new HashMap<String, CarType>();
 
 	/***************

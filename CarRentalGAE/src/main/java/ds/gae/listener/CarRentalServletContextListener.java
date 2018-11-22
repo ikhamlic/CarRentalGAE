@@ -50,7 +50,7 @@ public class CarRentalServletContextListener implements ServletContextListener {
             CarRentalCompany company = new CarRentalCompany(name, cars);
             
     		// FIXME: use persistence instead
-            CarRentalModel.get().addCarRentalCompany(company);
+            CarRentalModel.get().persistCarRentalCompany(company);
 
         } catch (NumberFormatException ex) {
             Logger.getLogger(CarRentalServletContextListener.class.getName()).log(Level.SEVERE, "bad file", ex);

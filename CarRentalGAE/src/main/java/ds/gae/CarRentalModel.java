@@ -51,13 +51,17 @@ public class CarRentalModel {
      *
      * @return	the list of car rental companies
      */
-    public Collection<String> getAllRentalCompanyNames() {
+    @SuppressWarnings("unchecked")
+	public Collection<String> getAllRentalCompanyNames() {
 		EntityManager em = EMF.get().createEntityManager();
-		Query query = em.createQuery(
-					"SELECT crc.name FROM CarRentalCompany crc"
-				);
-		em.close();
-    	return query.getResultList();
+		try {
+			Query query = em.createQuery(
+						"SELECT crc.name FROM CarRentalCompany crc"
+					);
+			return query.getResultList();
+		} finally {
+			em.close();
+		}
     }
 	
 	/**
@@ -226,8 +230,13 @@ public class CarRentalModel {
 		return this.getReservations(renter).size() > 0;		
 	}
 
-	public void addCarRentalCompany(CarRentalCompany company) {
-		// TODO Auto-generated method stub
+	public void persistCarRentalCompany(CarRentalCompany company) {
+		EntityManager em = EMF.get().createEntityManager();
+		try {
+			em.persist(company);
+		} finally {
+			em.close();
+		}
 		
 	}	
 }

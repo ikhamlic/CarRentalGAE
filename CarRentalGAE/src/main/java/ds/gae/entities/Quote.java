@@ -7,12 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.google.appengine.api.datastore.Key;
+
 @MappedSuperclass
 public class Quote {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long key;
+    private Key key;
 	
     private Date startDate;
     private Date endDate;
@@ -38,7 +40,7 @@ public class Quote {
         this.rentalPrice = rentalPrice;
     }
 
-    public long getKey() {
+    public Key getKey() {
     	return key;
     }
     
