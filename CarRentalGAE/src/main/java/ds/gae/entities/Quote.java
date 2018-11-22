@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.google.appengine.api.datastore.Key;
 
@@ -16,7 +18,9 @@ public class Quote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Key key;
 	
+	@Temporal(value = TemporalType.DATE)
     private Date startDate;
+	@Temporal(value = TemporalType.DATE)
     private Date endDate;
     private String carRenter;
     private String rentalCompany;

@@ -3,16 +3,20 @@ package ds.gae.listener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.persistence.EntityManager;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import ds.gae.CarRentalModel;
+import ds.gae.EMF;
 import ds.gae.entities.Car;
 import ds.gae.entities.CarRentalCompany;
 import ds.gae.entities.CarType;
@@ -44,18 +48,22 @@ public class CarRentalServletContextListener implements ServletContextListener {
 	
 	private void loadRental(String name, String datafile) {
 		Logger.getLogger(CarRentalServletContextListener.class.getName()).log(Level.INFO, "loading {0} from file {1}", new Object[]{name, datafile});
-        try {
+		EntityManager em = EMF.get().createEntityManager();
+		try {
         	
             Set<Car> cars = loadData(name, datafile);
             CarRentalCompany company = new CarRentalCompany(name, cars);
             
-    		// FIXME: use persistence instead
-            CarRentalModel.get().persistCarRentalCompany(company);
-
+    		// FIXME: use persistence instead            
+            //CarRentalModel.get().persistCarRentalCompany(company);
+            em.persist(company);
+            
         } catch (NumberFormatException ex) {
             Logger.getLogger(CarRentalServletContextListener.class.getName()).log(Level.SEVERE, "bad file", ex);
         } catch (IOException ex) {
             Logger.getLogger(CarRentalServletContextListener.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+        	em.close();
         }
 	}
 	

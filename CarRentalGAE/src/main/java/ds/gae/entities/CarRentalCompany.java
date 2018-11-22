@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.google.appengine.datanucleus.annotations.Unowned;
 
 import ds.gae.ReservationException;
 
@@ -26,6 +27,7 @@ public class CarRentalCompany {
 	
 	@Id
 	private String name;
+	
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	private Set<Car> cars;

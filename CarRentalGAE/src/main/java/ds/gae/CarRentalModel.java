@@ -58,10 +58,13 @@ public class CarRentalModel {
 			Query query = em.createQuery(
 						"SELECT crc.name FROM CarRentalCompany crc"
 					);
+
 			return query.getResultList();
 		} finally {
 			em.close();
 		}
+
+		
     }
 	
 	/**
@@ -235,8 +238,10 @@ public class CarRentalModel {
 		try {
 			em.persist(company);
 		} finally {
+			//If I close the EntityManager I will get an com.google.appengine.datanucleus.EntityUtils$ChildWithoutParentException
+			//exception. If I don't close the EntityManager I don't get this error...
+
 			em.close();
 		}
-		
 	}	
 }
