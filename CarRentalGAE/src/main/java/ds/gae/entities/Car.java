@@ -27,7 +27,7 @@ public class Car {
 	
     private int id;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
     private CarType type;
 	
 	@OneToMany(cascade=CascadeType.ALL)

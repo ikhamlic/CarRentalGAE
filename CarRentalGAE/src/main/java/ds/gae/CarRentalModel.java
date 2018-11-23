@@ -247,12 +247,17 @@ public class CarRentalModel {
 
 	public void persistCarRentalCompany(CarRentalCompany company) {
 		EntityManager em = EMF.get().createEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
 		try {
 			em.persist(company);
+			tx.commit();
 		} finally {
 			//If I close the EntityManager I will get an com.google.appengine.datanucleus.EntityUtils$ChildWithoutParentException
 			//exception. If I don't close the EntityManager I don't get this error...
-
+			if (tx.isActive()) {
+				tx.rollback();
+			}
 			em.close();
 		}
 		

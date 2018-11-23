@@ -15,6 +15,7 @@
 			<property name="datanucleus.ConnectionURL" value="appengine" />
 			<property name="datanucleus.singletonEMFForName"
 				value="true" />
+			<property name="datanucleus.appengine.datastoreEnableXGTransactions" value="true"/>
 		</properties>
 	</persistence-unit>
 </persistence>
