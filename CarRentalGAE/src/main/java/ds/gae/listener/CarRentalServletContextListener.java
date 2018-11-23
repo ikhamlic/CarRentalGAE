@@ -55,16 +55,17 @@ public class CarRentalServletContextListener implements ServletContextListener {
             CarRentalCompany company = new CarRentalCompany(name, cars);
             
     		// FIXME: use persistence instead            
-            //CarRentalModel.get().persistCarRentalCompany(company);
-            em.persist(company);
+            CarRentalModel.get().persistCarRentalCompany(company);
+            //em.persist(company);
             
         } catch (NumberFormatException ex) {
             Logger.getLogger(CarRentalServletContextListener.class.getName()).log(Level.SEVERE, "bad file", ex);
         } catch (IOException ex) {
             Logger.getLogger(CarRentalServletContextListener.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-        	em.close();
-        }
+        } 
+//		finally {
+//        	em.close();
+//        }
 	}
 	
 	public static Set<Car> loadData(String name, String datafile) throws NumberFormatException, IOException {

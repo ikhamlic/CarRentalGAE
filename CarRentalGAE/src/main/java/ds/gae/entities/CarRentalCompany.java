@@ -15,6 +15,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import com.google.appengine.datanucleus.annotations.Unowned;
 
@@ -22,7 +23,6 @@ import ds.gae.ReservationException;
 
 @Entity
 public class CarRentalCompany {
-
 	private static Logger logger = Logger.getLogger(CarRentalCompany.class.getName());
 	
 	@Id
